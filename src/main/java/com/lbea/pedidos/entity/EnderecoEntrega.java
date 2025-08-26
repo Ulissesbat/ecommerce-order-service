@@ -1,13 +1,6 @@
 package com.lbea.pedidos.entity;
 
-import java.time.LocalDateTime;
-
-import com.lbea.pedidos.enums.PedidoStatus;
-import com.lbea.pedidos.enums.TipoPagamento;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,28 +13,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_pagamento")
+@Table(name = "tb_endereco_entrega")
 @AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Pagamento {
-
+public class EnderecoEntrega {
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Enumerated(EnumType.STRING)
-	private TipoPagamento tipo;
-	
-	@Enumerated(EnumType.STRING)
-	private PedidoStatus status;
-	
+	private String rua;
+	private String cidade;
+	private String cep;
 
-	private LocalDateTime data;
-	
 	@OneToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
-
 }

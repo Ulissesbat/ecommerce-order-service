@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.lbea.pedidos.PedidoStatus;
+import com.lbea.pedidos.enums.PedidoStatus;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -45,6 +46,12 @@ public class Pedido {
 
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itens;
+	
+	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+	private Pagamento pagamento;
+	
+	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+	private EnderecoEntrega enderecoEntrega;
 
 	public BigDecimal calcularTotal() {
 		return itens.stream().map(ItemPedido::calcularSubTotal).reduce(BigDecimal.ZERO, BigDecimal::add);

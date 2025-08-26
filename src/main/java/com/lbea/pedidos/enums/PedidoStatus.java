@@ -1,4 +1,4 @@
-package com.lbea.pedidos;
+package com.lbea.pedidos.enums;
 
 public enum PedidoStatus {
 	
