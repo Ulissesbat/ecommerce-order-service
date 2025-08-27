@@ -1,4 +1,4 @@
-package com.lbea.pedidos.entity;
+package com.lbea.pedidos.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
