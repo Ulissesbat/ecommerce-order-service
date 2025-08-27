@@ -24,6 +24,7 @@ public class ClienteDTO {
 	        this.id = entity.getId();
 	        this.nome = entity.getNome();
 	        this.email = entity.getEmail();
+	        this.cpf = entity.getCpf();
 	        pedidos = entity.getPedidos()
                     .stream()
                     .map(PedidoMinDTO::new)

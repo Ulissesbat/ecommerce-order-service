@@ -1,5 +1,6 @@
 package com.lbea.pedidos.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -12,11 +13,13 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_cliente")
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -32,6 +35,6 @@ public class Cliente {
 
 	// Um cliente pode ter vários pedidos
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-	private List<Pedido> pedidos;
+	private List<Pedido> pedidos = new ArrayList<>();
 
 }
