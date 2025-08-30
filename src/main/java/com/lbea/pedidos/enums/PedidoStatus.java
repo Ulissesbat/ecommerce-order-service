@@ -7,7 +7,8 @@ public enum PedidoStatus {
     PAGO,         
     SEPARANDO,    
     ENVIADO,      
-    ENTREGUE,      
+    ENTREGUE,
+    PENDENTE,
     CANCELADO;      
 
 }
