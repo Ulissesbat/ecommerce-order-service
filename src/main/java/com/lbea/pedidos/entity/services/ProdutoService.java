@@ -9,9 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lbea.pedidos.dto.ClienteDTO;
 import com.lbea.pedidos.dto.ProdutoDTO;
-import com.lbea.pedidos.entities.Cliente;
 import com.lbea.pedidos.entities.Produto;
 import com.lbea.pedidos.entity.services.Exceptions.DatabaseException;
 import com.lbea.pedidos.entity.services.Exceptions.ResourceNotFoundException;
