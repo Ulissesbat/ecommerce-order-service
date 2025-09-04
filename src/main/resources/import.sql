@@ -11,6 +11,11 @@ INSERT INTO tb_pedido (data, status, cliente_id) VALUES ('2025-08-27 09:00:00', 
 INSERT INTO tb_endereco_entrega (rua, cidade, cep, numero, pedido_id) VALUES ('Rua das Flores', 'Guarulhos', '01000-000', '123', 1);
 INSERT INTO tb_endereco_entrega (rua, cidade, cep, numero, pedido_id) VALUES ('Av. Brasil', 'Rio de Janeiro', '20000-000', '456', 2);
 
+INSERT INTO tb_categoria (nome) VALUES ('Alimentos');
+INSERT INTO tb_categoria (nome) VALUES ('Bebidas');
+INSERT INTO tb_categoria (nome) VALUES ('Higiene');
+INSERT INTO tb_categoria (nome) VALUES ('Limpeza');
+
 INSERT INTO tb_produto (nome, preco, estoque) VALUES ('Arroz', 25.00, 100);
 INSERT INTO tb_produto (nome, preco, estoque) VALUES ('Feijão', 10.00, 200);
 INSERT INTO tb_produto (nome, preco, estoque) VALUES ('Macarrão', 5.20, 150);
@@ -21,6 +26,18 @@ INSERT INTO tb_produto (nome, preco, estoque) VALUES ('Farinha de Trigo', 6.40, 
 INSERT INTO tb_produto (nome, preco, estoque) VALUES ('Leite em Pó', 12.50, 70);
 INSERT INTO tb_produto (nome, preco, estoque) VALUES ('Manteiga', 9.90, 50);
 INSERT INTO tb_produto (nome, preco, estoque) VALUES ('Sal', 3.20, 300);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1, 1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (2, 1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (3, 1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (5, 1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (7, 1);
+
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (4, 4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (10, 4);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (6, 2);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (8, 2);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (9, 3);
 
 INSERT INTO tb_Intem_pedido (produto_id, quantidade, preco, pedido_id) VALUES (1, 5, 125.00, 1);
 INSERT INTO tb_Intem_pedido (produto_id, quantidade, preco, pedido_id) VALUES (2, 3, 30.00, 2);
