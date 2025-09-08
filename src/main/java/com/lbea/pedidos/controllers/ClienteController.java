@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lbea.pedidos.dto.ClienteDTO;
-import com.lbea.pedidos.entity.services.ClienteService;
 import com.lbea.pedidos.entity.services.Exceptions.ResourceNotFoundException;
+import com.lbea.pedidos.services.ClienteService;
 
 @RestController
 @RequestMapping(value = "/clientes")

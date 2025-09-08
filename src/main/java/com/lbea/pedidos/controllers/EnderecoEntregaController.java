@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lbea.pedidos.dto.EnderecoEntregaDTO;
-import com.lbea.pedidos.entity.services.EnderecoEntregaService;
 import com.lbea.pedidos.entity.services.Exceptions.ResourceNotFoundException;
+import com.lbea.pedidos.services.EnderecoEntregaService;
 
 @RestController
 @RequestMapping(value = "/endereco")

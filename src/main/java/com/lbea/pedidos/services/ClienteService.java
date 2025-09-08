@@ -1,4 +1,4 @@
-package com.lbea.pedidos.entity.services;
+package com.lbea.pedidos.services;
 
 import java.util.Optional;
 

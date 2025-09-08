@@ -21,11 +21,13 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_pedido")
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -52,6 +54,28 @@ public class Pedido {
 	
 	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private EnderecoEntrega enderecoEntrega;
+	
+	 public Pedido(Cliente cliente, List<ItemPedido> itens, Pagamento pagamento, EnderecoEntrega endereco) {
+	        this.cliente = cliente;
+	        this.itens = itens;
+	        this.pagamento = pagamento;
+	        this.enderecoEntrega = endereco;
+	        this.status = PedidoStatus.PENDENTE;
+	        this.data = LocalDateTime.now();
+
+	        if (itens != null) {
+	            for (ItemPedido item : itens) {
+	                item.setPedido(this);
+	            }
+	        }
+
+	        if (pagamento != null) {
+	            pagamento.setPedido(this);
+	        }
+	        if (endereco != null) {
+	            endereco.setPedido(this);
+	        }
+	    }
 
 	public BigDecimal calcularTotal() {
 		return itens.stream().map(ItemPedido::calcularSubTotal).reduce(BigDecimal.ZERO, BigDecimal::add);

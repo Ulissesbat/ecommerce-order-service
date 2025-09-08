@@ -8,15 +8,18 @@ import com.lbea.pedidos.enums.PedidoStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class PedidoMinDTO {
 	
 	private Long id;
     private LocalDateTime data;
     private PedidoStatus status;
+
 
     public PedidoMinDTO(Pedido entity) {
         id = entity.getId();

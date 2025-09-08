@@ -39,14 +39,14 @@ INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (6, 2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (8, 2);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (9, 3);
 
-INSERT INTO tb_Intem_pedido (produto_id, quantidade, preco, pedido_id) VALUES (1, 5, 125.00, 1);
-INSERT INTO tb_Intem_pedido (produto_id, quantidade, preco, pedido_id) VALUES (2, 3, 30.00, 2);
-INSERT INTO tb_Intem_pedido (produto_id, quantidade, preco, pedido_id) VALUES (3,2, 10.40, 3);
-INSERT INTO tb_Intem_pedido (produto_id, quantidade, preco, pedido_id) VALUES (10, 3, 9.60, 1);
+INSERT INTO tb_Item_pedido (produto_id, quantidade, preco, pedido_id) VALUES (1, 5, 125.00, 1);
+INSERT INTO tb_Item_pedido (produto_id, quantidade, preco, pedido_id) VALUES (2, 3, 30.00, 2);
+INSERT INTO tb_Item_pedido (produto_id, quantidade, preco, pedido_id) VALUES (3,2, 10.40, 3);
+INSERT INTO tb_Item_pedido (produto_id, quantidade, preco, pedido_id) VALUES (10, 3, 9.60, 1);
 
-INSERT INTO tb_pagamento (tipo, status, data, pedido_id) VALUES ('CARTAO_CREDITO', 'PAGO', '2025-08-29 14:30:00', 1);
-INSERT INTO tb_pagamento (tipo, status, data, pedido_id) VALUES ('PIX', 'PENDENTE', '2025-08-29 15:00:00', 2);
-INSERT INTO tb_pagamento (tipo, status, data, pedido_id) VALUES ('BOLETO', 'CANCELADO', '2025-08-29 16:00:00', 3);
+INSERT INTO tb_pagamento (tipo, pagamento_status, data, pedido_status, pedido_id) VALUES ('CARTAO_CREDITO',  'APROVADO', '2025-08-29 14:30:00', 'ENVIADO' ,1);
+INSERT INTO tb_pagamento (tipo, pagamento_status, data, pedido_status, pedido_id) VALUES ('PIX', 'PENDENTE', '2025-08-29 15:00:00', 'PENDENTE' ,2);
+INSERT INTO tb_pagamento (tipo, pagamento_status, data, pedido_status, pedido_id) VALUES ('BOLETO', 'CANCELADO', '2025-08-29 16:00:00', 'CANCELADO', 3);
 
 
 

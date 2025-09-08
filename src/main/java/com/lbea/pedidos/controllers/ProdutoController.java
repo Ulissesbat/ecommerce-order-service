@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lbea.pedidos.dto.ProdutoDTO;
-import com.lbea.pedidos.entity.services.ProdutoService;
 import com.lbea.pedidos.entity.services.Exceptions.ResourceNotFoundException;
+import com.lbea.pedidos.services.ProdutoService;
 
 @RestController
 @RequestMapping(value = "/produtos")

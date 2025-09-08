@@ -7,10 +7,12 @@ import com.lbea.pedidos.entities.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class ClienteDTO {
 
 	private Long id;

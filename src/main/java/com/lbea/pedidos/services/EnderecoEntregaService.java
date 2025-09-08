@@ -1,4 +1,4 @@
-package com.lbea.pedidos.entity.services;
+package com.lbea.pedidos.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
