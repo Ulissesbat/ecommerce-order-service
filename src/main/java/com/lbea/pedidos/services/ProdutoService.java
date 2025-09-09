@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lbea.pedidos.dto.CategoriaDTO;
@@ -38,7 +39,7 @@ public class ProdutoService {
 	@Transactional(readOnly = true)
 	public ProdutoDTO findById(Long id) {
 		Optional<Produto> obj = produtoRepository.findById(id);
-		Produto entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		Produto entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found"));
 		return new ProdutoDTO(entity);
 	}
 	
@@ -64,7 +65,7 @@ public class ProdutoService {
 		}
 	}
 	
-	@Transactional
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public void delete(Long id) {
 	    if (!produtoRepository.existsById(id)) {
 	        throw new ResourceNotFoundException("Id not found " + id);

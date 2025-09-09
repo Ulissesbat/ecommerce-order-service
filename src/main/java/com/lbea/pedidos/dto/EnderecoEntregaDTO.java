@@ -18,6 +18,7 @@ public class EnderecoEntregaDTO {
 	private String cidade;
 	private String cep;
 	private int numero;
+	private Long pedidoId;
 
 	public EnderecoEntregaDTO(EnderecoEntrega entity) {
 		this.id = entity.getId();
@@ -25,6 +26,7 @@ public class EnderecoEntregaDTO {
 		this.cidade = entity.getCidade();
 		this.cep = entity.getCep();
 		this.numero = entity.getNumero();
+		
 	
 	}
 }

@@ -6,38 +6,46 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lbea.pedidos.dto.EnderecoEntregaDTO;
 import com.lbea.pedidos.entities.EnderecoEntrega;
-import com.lbea.pedidos.entity.services.Exceptions.ResourceNotFoundException;
+import com.lbea.pedidos.entities.Pedido;
 import com.lbea.pedidos.repositories.EndereçoEntregaRepository;
-
-import jakarta.persistence.EntityNotFoundException;
+import com.lbea.pedidos.repositories.PedidoRepository;
 
 @Service
 public class EnderecoEntregaService {
 	
 	@Autowired
-	private EndereçoEntregaRepository repository;
+	private EndereçoEntregaRepository enderecoRepository;
 	
-	@Transactional
-	public EnderecoEntregaDTO insert(EnderecoEntregaDTO dto) {
-		EnderecoEntrega entity = new EnderecoEntrega();
-		copyDtoToEntity(dto, entity);
-		entity = repository.save(entity);
-		return new EnderecoEntregaDTO (entity);
-	}
-	
-	@Transactional
-	public EnderecoEntregaDTO update (Long id, EnderecoEntregaDTO dto) throws ResourceNotFoundException {
-		
-		try {
-			EnderecoEntrega entity = repository.getReferenceById(id);
-			copyDtoToEntity(dto, entity);
-			entity = repository.save(entity);
-			return new EnderecoEntregaDTO(entity);
-		}
-		catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Id not found " + id);
-		}
-	}
+	@Autowired
+	private PedidoRepository pedidoRepository;
+
+    @Transactional
+    public EnderecoEntregaDTO atualizarEnderecoPorPedidoId(Long pedidoId, EnderecoEntregaDTO dto) {
+        // Busca o pedido
+        Pedido pedido = pedidoRepository.findById(pedidoId)
+            .orElseThrow(() -> new RuntimeException("Pedido não encontrado com ID: " + pedidoId));
+
+        // Verifica se o pedido já tem um endereço de entrega
+        EnderecoEntrega enderecoExistente = pedido.getEnderecoEntrega();
+        
+        if (enderecoExistente == null) {
+            // Se não existir, cria um novo endereço
+            EnderecoEntrega novoEndereco = new EnderecoEntrega();
+            copyDtoToEntity(dto, novoEndereco);
+            novoEndereco.setPedido(pedido);
+            
+            EnderecoEntrega enderecoSalvo = enderecoRepository.save(novoEndereco);
+            pedido.setEnderecoEntrega(enderecoSalvo);
+            pedidoRepository.save(pedido);
+            
+            return new EnderecoEntregaDTO(enderecoSalvo);
+        } else {
+            // Se existir, atualiza o endereço existente
+            copyDtoToEntity(dto, enderecoExistente);
+            EnderecoEntrega enderecoAtualizado = enderecoRepository.save(enderecoExistente);
+            return new EnderecoEntregaDTO(enderecoAtualizado);
+        }
+    }
 
 	private void copyDtoToEntity(EnderecoEntregaDTO dto, EnderecoEntrega entity) {
 		entity.setRua(dto.getRua());

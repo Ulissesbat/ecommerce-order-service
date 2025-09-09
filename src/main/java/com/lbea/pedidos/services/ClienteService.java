@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lbea.pedidos.dto.ClienteDTO;
@@ -32,7 +33,7 @@ public class ClienteService {
 	@Transactional(readOnly = true)
 	public ClienteDTO findById(Long id) {
 		Optional<Cliente> obj = clienteRepository.findById(id);
-		Cliente entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		Cliente entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found"));
 		return new ClienteDTO(entity);
 	}
 	
@@ -59,13 +60,13 @@ public class ClienteService {
 	}
 	
 	
-	@Transactional
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public void delete(Long id) {
 	    if (!clienteRepository.existsById(id)) {
 	        throw new ResourceNotFoundException("Id not found " + id);
 	    }
 	    try {
-	        clienteRepository.deleteById(id);
+	        clienteRepository.deleteById(id);	        
 	    } catch (DataIntegrityViolationException e) {
 	        throw new DatabaseException("Integrity violation");
 	    }
