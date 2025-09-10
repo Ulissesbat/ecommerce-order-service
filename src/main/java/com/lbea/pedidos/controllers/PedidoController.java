@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lbea.pedidos.dto.PedidoDTO;
 import com.lbea.pedidos.services.PedidoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
@@ -21,7 +23,7 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<PedidoDTO> criarPedido(@RequestBody PedidoDTO dto) {
+    public ResponseEntity<PedidoDTO> criarPedido(@Valid @RequestBody PedidoDTO dto) {
         PedidoDTO newPedido = pedidoService.criarPedido(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newPedido);
     }

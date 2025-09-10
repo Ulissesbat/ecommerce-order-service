@@ -20,6 +20,8 @@ import com.lbea.pedidos.dto.ClienteDTO;
 import com.lbea.pedidos.entity.services.Exceptions.ResourceNotFoundException;
 import com.lbea.pedidos.services.ClienteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteController {
@@ -40,7 +42,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ClienteDTO> insert(@RequestBody ClienteDTO dto){
+	public ResponseEntity<ClienteDTO> insert(@Valid @RequestBody ClienteDTO dto){
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
@@ -49,7 +51,7 @@ public class ClienteController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ClienteDTO> update(@PathVariable Long id, @RequestBody ClienteDTO dto) {
+	public ResponseEntity<ClienteDTO> update(@PathVariable Long id, @Valid @RequestBody ClienteDTO dto) {
 	    try {
 	        ClienteDTO newDto = service.update(id, dto);
 	        return ResponseEntity.ok().body(newDto);
