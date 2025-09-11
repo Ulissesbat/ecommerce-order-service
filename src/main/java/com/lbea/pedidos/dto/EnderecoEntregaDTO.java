@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class EnderecoEntregaDTO {
+public class EnderecoEntregaDTO { 
 	
 	private Long id;
 	
@@ -45,6 +45,7 @@ public class EnderecoEntregaDTO {
 		this.cidade = entity.getCidade();
 		this.cep = entity.getCep();
 		this.numero = entity.getNumero();
+		this.pedidoId = entity.getPedido().getId();
 		
 	
 	}

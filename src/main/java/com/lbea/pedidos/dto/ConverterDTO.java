@@ -58,13 +58,13 @@ public class ConverterDTO {
         }
         
         ItemPedidoDTO dto = new ItemPedidoDTO();
-        dto.setId(item.getId());
+        dto.setProdutoId(item.getProduto().getId());
         dto.setQuantidade(item.getQuantidade());
         dto.setPreco(item.getPreco());
         
         // Converte o produto
         if (item.getProduto() != null) {
-            dto.setProduto(converterProdutoParaDTO(item.getProduto()));
+        	dto.setProdutoId(item.getProduto().getId());
         }
         
         return dto;
@@ -95,7 +95,7 @@ public class ConverterDTO {
         dto.setStatus(pedido.getStatus());
         
         // Converte cliente
-        dto.setCliente(converterClienteParaDTO(pedido.getCliente()));
+        dto.setClienteId(pedido.getCliente().getId());
         
         // Converte pagamento
         dto.setPagamento(converterPagamentoParaDTO(pedido.getPagamento()));

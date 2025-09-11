@@ -28,12 +28,11 @@ public class PedidoDTO {
     @PastOrPresent(message = "A data do pedido não pode ser no futuro")
 	private LocalDateTime data;
 
-	@NotNull(message = "O status do pedido é obrigatório")
+	
 	private PedidoStatus status;
 
 	@NotNull(message = "O cliente é obrigatório")
-	@Valid
-	private ClienteDTO cliente;
+    private Long clienteId;
 
 	@Valid
 	private PagamentoDTO pagamento;
@@ -50,7 +49,7 @@ public class PedidoDTO {
 		this.id = entity.getId();
 		this.data = entity.getData();
 		this.status = entity.getStatus();
-		this.cliente = new ClienteDTO(entity.getCliente());
+		  this.clienteId = entity.getCliente() != null ? entity.getCliente().getId() : null;
 		this.pagamento = entity.getPagamento() != null ? new PagamentoDTO(entity.getPagamento()) : null;
 		this.enderecoEntrega = entity.getEnderecoEntrega() != null ? new EnderecoEntregaDTO(entity.getEnderecoEntrega())
 				: null;

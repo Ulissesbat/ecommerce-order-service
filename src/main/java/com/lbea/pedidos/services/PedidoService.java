@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lbea.pedidos.dto.ConverterDTO;
+import com.lbea.pedidos.dto.EnderecoEntregaDTO;
 import com.lbea.pedidos.dto.PedidoDTO;
 import com.lbea.pedidos.entities.Cliente;
 import com.lbea.pedidos.entities.EnderecoEntrega;
@@ -47,8 +48,8 @@ public class PedidoService {
         pedido.setStatus(PedidoStatus.PENDENTE);
 
         // Mapeia Cliente
-        if(dto.getCliente() != null && dto.getCliente().getId() != null) {
-        	Cliente cliente = clienteRepository.findById(dto.getCliente().getId())
+        if(dto.getClienteId() != null) {
+        	Cliente cliente = clienteRepository.findById(dto.getClienteId())
         	        .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         	    pedido.setCliente(cliente);
         }
@@ -56,7 +57,7 @@ public class PedidoService {
         // Mapeia Itens
         List<ItemPedido> itens = dto.getItens().stream().map(itemDto -> {
             ItemPedido item = new ItemPedido();
-            Produto produto = produtoRepository.getReferenceById(itemDto.getProduto().getId());
+            Produto produto = produtoRepository.getReferenceById(itemDto.getProdutoId());
             item.setProduto(produto);
             item.setQuantidade(itemDto.getQuantidade());
             item.setPreco(itemDto.getPreco());

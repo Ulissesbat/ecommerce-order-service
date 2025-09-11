@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.lbea.pedidos.entities.ItemPedido;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,15 +15,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ItemPedidoDTO {
-    private Long id;
-    private Integer quantidade;
-    private BigDecimal preco;
-    private ProdutoDTO produto;
 
-    public ItemPedidoDTO(ItemPedido entity) {
-        this.id = entity.getId();
-        this.quantidade = entity.getQuantidade();
-        this.preco = entity.getPreco();
-        this.produto = new ProdutoDTO(entity.getProduto());
-    }
+	@NotNull
+	private Long produtoId;
+	private Integer quantidade;
+	private BigDecimal preco;
+
+	public ItemPedidoDTO(ItemPedido entity) {
+
+		this.quantidade = entity.getQuantidade();
+		this.preco = entity.getPreco();
+		this.produtoId = entity.getProduto().getId();
+
+	}
 }
