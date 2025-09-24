@@ -1,5 +1,7 @@
 package com.lbea.pedidos.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_role")
 @AllArgsConstructor
@@ -18,11 +21,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Role {
+public class Role implements GrantedAuthority{
 	
 	
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String authority;
+    
+    
+    @Override
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
 
 }
