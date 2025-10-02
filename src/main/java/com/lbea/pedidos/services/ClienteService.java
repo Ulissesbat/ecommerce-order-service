@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lbea.pedidos.dto.AuthUserDTO;
 import com.lbea.pedidos.dto.ClienteDTO;
 import com.lbea.pedidos.entities.AuthUser;
 import com.lbea.pedidos.entities.Cliente;
@@ -110,10 +111,11 @@ public class ClienteService implements UserDetailsService{
 
 	}
 	@Transactional(readOnly = true)
-	public ClienteDTO getMe() {
-		Cliente cliente = authenticated();
-		return new ClienteDTO(cliente);
+	public AuthUserDTO getMe() {
+	    Cliente cliente = authenticated();
+	    return new AuthUserDTO(cliente.getAuthUser());
 	}
+
 
 	
 	private void copyDtoToEntity(ClienteDTO dto, Cliente entity) {

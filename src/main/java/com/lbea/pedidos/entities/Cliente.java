@@ -1,11 +1,7 @@
 package com.lbea.pedidos.entities;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,6 +42,9 @@ public class Cliente {
 	// Um cliente pode ter vários pedidos
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Pedido> pedidos = new ArrayList<>();
+	
+	
+
 
 	
 }

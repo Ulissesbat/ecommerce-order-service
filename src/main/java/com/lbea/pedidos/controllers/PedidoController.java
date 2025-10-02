@@ -2,6 +2,9 @@ package com.lbea.pedidos.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +24,15 @@ public class PedidoController {
     public PedidoController(PedidoService pedidoService) {
         this.pedidoService = pedidoService;
     }
+    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+    @GetMapping("/{id}")
+    public ResponseEntity<PedidoDTO> findById(@PathVariable Long id) {
+        PedidoDTO dto = pedidoService.findById(id);
+        return ResponseEntity.ok(dto);
+    }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<PedidoDTO> criarPedido(@Valid @RequestBody PedidoDTO dto) {
         PedidoDTO newPedido = pedidoService.criarPedido(dto);

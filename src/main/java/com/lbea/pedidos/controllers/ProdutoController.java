@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,12 +36,14 @@ public class ProdutoController {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ProdutoDTO> findById(@PathVariable Long id) {
 		ProdutoDTO dto = produtoService.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping
 	public ResponseEntity<ProdutoDTO> insert(@Valid @RequestBody ProdutoDTO dto){
 		dto = produtoService.insert(dto);
@@ -50,6 +53,7 @@ public class ProdutoController {
 		
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ProdutoDTO> update(@PathVariable Long id, @Valid @RequestBody ProdutoDTO dto) {
 	    try {
@@ -60,6 +64,7 @@ public class ProdutoController {
 	    }
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		produtoService.delete(id);

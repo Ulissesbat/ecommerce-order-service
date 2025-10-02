@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lbea.pedidos.dto.ConverterDTO;
-import com.lbea.pedidos.dto.EnderecoEntregaDTO;
 import com.lbea.pedidos.dto.PedidoDTO;
 import com.lbea.pedidos.entities.Cliente;
 import com.lbea.pedidos.entities.EnderecoEntrega;
@@ -16,6 +15,7 @@ import com.lbea.pedidos.entities.ItemPedido;
 import com.lbea.pedidos.entities.Pagamento;
 import com.lbea.pedidos.entities.Pedido;
 import com.lbea.pedidos.entities.Produto;
+import com.lbea.pedidos.entity.services.Exceptions.ResourceNotFoundException;
 import com.lbea.pedidos.enums.PedidoStatus;
 import com.lbea.pedidos.repositories.ClienteRepository;
 import com.lbea.pedidos.repositories.PedidoRepository;
@@ -28,16 +28,29 @@ public class PedidoService {
     private final ProdutoRepository produtoRepository;
     private final ClienteRepository clienteRepository;
     private final ConverterDTO converterDTO;
+    private final AuthUserService authService;
 
     public PedidoService(PedidoRepository pedidoRepository, 
                         ProdutoRepository produtoRepository,
                         ClienteRepository clienteRepository,
-                        
-                        ConverterDTO converterDTO) {
+                        ConverterDTO converterDTO,
+                        AuthUserService authService) {
         this.pedidoRepository = pedidoRepository;
         this.produtoRepository = produtoRepository;
         this.clienteRepository = clienteRepository;
         this.converterDTO = converterDTO;
+        this.authService = authService;
+    }
+    
+    @Transactional(readOnly = true)
+    public PedidoDTO findById(Long id) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
+        
+        // Aqui eu valido se o usuário autenticado é dono do pedido ou admin
+        authService.validationSelfOrAdmin(pedido.getCliente().getId());
+
+        return new PedidoDTO(pedido);
     }
 
     @Transactional

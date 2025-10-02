@@ -4,7 +4,7 @@ INSERT INTO tb_cliente (nome, email, cpf) VALUES ('João Souza', 'joao@gmail.com
 INSERT INTO tb_cliente (nome, email, cpf) VALUES ( 'Ulisses Batista', 'ulisses@gmail.com', '04528136546');
 INSERT INTO tb_cliente (nome, email, cpf) VALUES ( 'Lais Alves', 'lais@gmail.com', '42102056805');
 
-INSERT INTO tb_role (id, authority) VALUES (1, 'ROLE_USER');
+INSERT INTO tb_role (id, authority) VALUES (1, 'ROLE_CLIENT');
 INSERT INTO tb_role (id, authority) VALUES (2, 'ROLE_ADMIN');
 
 INSERT INTO tb_auth_user (id, email, password, cliente_id) VALUES (1, 'maria@gmail.com', '$2a$10$HDY6WHx3YljY.Khb6Tmdu.zsToT/4VzMBsCPxWOxxY9kX.GrLJEci', 1);
@@ -12,10 +12,10 @@ INSERT INTO tb_auth_user (id, email, password, cliente_id) VALUES (2, 'joao@gmai
 INSERT INTO tb_auth_user (id, email, password, cliente_id) VALUES (3, 'ulisses@gmail.com', '$2a$10$HDY6WHx3YljY.Khb6Tmdu.zsToT/4VzMBsCPxWOxxY9kX.GrLJEci', 3);
 INSERT INTO tb_auth_user (id, email, password, cliente_id) VALUES (4, 'lais@gmail.com', '$2a$10$HDY6WHx3YljY.Khb6Tmdu.zsToT/4VzMBsCPxWOxxY9kX.GrLJEci', 4);
 
-INSERT INTO tb_auth_user_role (auth_user_id, role_id) VALUES (1, 1); -- Maria USER
-INSERT INTO tb_auth_user_role (auth_user_id, role_id) VALUES (2, 1); -- João USER
+INSERT INTO tb_auth_user_role (auth_user_id, role_id) VALUES (1, 1); -- Maria CLIENT
+INSERT INTO tb_auth_user_role (auth_user_id, role_id) VALUES (2, 1); -- João CLIENT
 INSERT INTO tb_auth_user_role (auth_user_id, role_id) VALUES (3, 2); -- Ulisses ADMIN
-INSERT INTO tb_auth_user_role (auth_user_id, role_id) VALUES (4, 1); -- Lais USER
+INSERT INTO tb_auth_user_role (auth_user_id, role_id) VALUES (4, 1); -- Lais CLIENT
 
 
 
